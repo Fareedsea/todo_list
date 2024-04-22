@@ -65,7 +65,6 @@ while (condition) {
     }
     else {
         console.clear();
-        console.log("Exit");
         condition = false;
     }
 }
