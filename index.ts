@@ -1,66 +1,70 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 import inquirer from "inquirer";
-let todo = [];
-let condition = true;
 
-let todoquestion = await inquirer.prompt({
-  name: "firstQuestion",
-  type: "input",
-  message: "What would you like to add in your todo list:",
-});
-todo = todoquestion.firstQuestion;
+    let todos: string[] = [];
+    let condition = true;
+    while (condition) {
+        let user_answer = await inquirer.prompt({
+            name: "uChoice",
+            message: "Please Select option : ",
+            type: "list",
+            choices: ["Read", "Add", "Update", "Delete", "Exit"],
+        });
 
-while(condition){
-let user_answer = await inquirer.prompt({
-  name: "uChoice",
-  message: "Please Select option : ",
-  type: "list",
-  choices: ["Read", "Add", "Update", "Delete", "Exit"],
-});
-if (user_answer.uChoice == "Read") {
-    console.clear();
-    console.log(todo);
-    condition = true;
-} else if (user_answer.uChoice == "Update") {
-    console.clear();
-    console.log("Update");
-    condition = true;
-} else if (user_answer.uChoice == "Add") {
-        console.clear();
-        const { todolist } = await inquirer.prompt([{
-        name: "todolist",
-        type: "input",
-        message: "What would you like to add in your todo list:",
-        }]); 
-        // todo = todo.push(todolist);
-        console.log(todo);
-        console.log("Add");
-        condition = true;
-
-} else if (user_answer.uChoice == "Delete") {
-        console.clear();
-        console.log("Delete");
-        condition = true;
-} else {
-        console.clear();
-        console.log("Exit");
-        condition = false;
-}
-}
-// If(user_answer.uChoice == "Read") {
-//     console.log(todoquestion);
-// } else If(user_answer.uChoice == "Add") {
-//     todo.push(todoquestion.firstQuestion)
-
-// } else If(user_answer.uChoice == "Update") {
-
-// } else If(user_answer.uChoice == "Delete") {
-
-// } else {
-// close
-// }
-
-// todo.push(todoquestion.firstQuestion);
-// console.log(todo);
-// condition = todoquestion.secondQuestion;
-
+        if (user_answer.uChoice == "Read") {
+            console.clear();
+            console.log(todos);
+        } else if (user_answer.uChoice == "Update") {
+        let todoUpdate: any = await inquirer.prompt(
+            [
+            {
+                name: "todoUpdt1",
+                type: "input",
+                message: "Please Enter your Edit Value from yur todos list -1:",
+            },
+            {
+                name: "todoUpdt2",
+                type: "input",
+                message: "Please Enter your Update Value for todos list:-2",
+            }
+            ]
+            );            
+            let i:number = 0;
+            for(let val of todos){                
+                if(val == todoUpdate.todoUpdt1){
+                    todos.splice(i, 1, todoUpdate.todoUpdt2);
+                    console.clear();
+                    console.log(todos); 
+                    break;
+                } 
+                i++
+            }                 
+        } else if (user_answer.uChoice == "Add") {
+                console.clear();
+                let moreAdd: any = await inquirer.prompt({
+                name: "todoAdd",
+                type: "input",
+                message: "What would you like to add in your todos list:",
+            });
+            todos.push(moreAdd.todoAdd); // Push new todo item into the array
+            console.log(todos);
+        } else if (user_answer.uChoice == "Delete") {
+            let todoDelete: any = await inquirer.prompt({
+                name: "todoDel",
+                type: "input",
+                message: "What would you like to Delete in your todos list:",
+            });
+            let i:number = 0;
+            for(let val of todos){
+                if(val == todoDelete.todoDel){
+                    todos.splice(i, 1);                    
+                } 
+                i++
+            }
+            console.clear();  
+            console.log(todos);            
+        } else {
+            console.clear();            
+            condition = false;
+        }
+    }

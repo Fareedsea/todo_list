@@ -1,13 +1,7 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 import inquirer from "inquirer";
-let todo = [];
+let todos = [];
 let condition = true;
-let todoquestion = await inquirer.prompt({
-    name: "firstQuestion",
-    type: "input",
-    message: "What would you like to add in your todo list:",
-});
-todo = todoquestion.firstQuestion;
 while (condition) {
     let user_answer = await inquirer.prompt({
         name: "uChoice",
@@ -17,31 +11,57 @@ while (condition) {
     });
     if (user_answer.uChoice == "Read") {
         console.clear();
-        console.log(todo);
-        condition = true;
+        console.log(todos);
     }
     else if (user_answer.uChoice == "Update") {
-        console.clear();
-        console.log("Update");
-        condition = true;
+        let todoUpdate = await inquirer.prompt([
+            {
+                name: "todoUpdt1",
+                type: "input",
+                message: "Please Enter your Edit Value from yur todos list -1:",
+            },
+            {
+                name: "todoUpdt2",
+                type: "input",
+                message: "Please Enter your Update Value for todos list:-2",
+            }
+        ]);
+        let i = 0;
+        for (let val of todos) {
+            if (val == todoUpdate.todoUpdt1) {
+                todos.splice(i, 1, todoUpdate.todoUpdt2);
+                console.clear();
+                console.log(todos);
+                break;
+            }
+            i++;
+        }
     }
     else if (user_answer.uChoice == "Add") {
         console.clear();
-        const { todolist } = await inquirer.prompt([{
-                name: "todolist",
-                type: "input",
-                message: "What would you like to add in your todo list:",
-            }]);
-        // todo = todo.push(todolist);
-        todo.push(todo);
-        console.log(todo);
-        console.log("Add");
-        condition = true;
+        let moreAdd = await inquirer.prompt({
+            name: "todoAdd",
+            type: "input",
+            message: "What would you like to add in your todos list:",
+        });
+        todos.push(moreAdd.todoAdd); // Push new todo item into the array
+        console.log(todos);
     }
     else if (user_answer.uChoice == "Delete") {
+        let todoDelete = await inquirer.prompt({
+            name: "todoDel",
+            type: "input",
+            message: "What would you like to Delete in your todos list:",
+        });
+        let i = 0;
+        for (let val of todos) {
+            if (val == todoDelete.todoDel) {
+                todos.splice(i, 1);
+            }
+            i++;
+        }
         console.clear();
-        console.log("Delete");
-        condition = true;
+        console.log(todos);
     }
     else {
         console.clear();
@@ -49,15 +69,3 @@ while (condition) {
         condition = false;
     }
 }
-// If(user_answer.uChoice == "Read") {
-//     console.log(todoquestion);
-// } else If(user_answer.uChoice == "Add") {
-//     todo.push(todoquestion.firstQuestion)
-// } else If(user_answer.uChoice == "Update") {
-// } else If(user_answer.uChoice == "Delete") {
-// } else {
-// close
-// }
-// todo.push(todoquestion.firstQuestion);
-// console.log(todo);
-// condition = todoquestion.secondQuestion;
