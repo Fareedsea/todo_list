@@ -18,12 +18,12 @@ while (condition) {
             {
                 name: "todoUpdt1",
                 type: "input",
-                message: "Please Enter your Edit Value from yur todos list -1:",
+                message: "Please Enter your Edit Name from your todos list ->:",
             },
             {
                 name: "todoUpdt2",
                 type: "input",
-                message: "Please Enter your Update Value for todos list:-2",
+                message: "Please Enter your Update Name for todos list ->",
             }
         ]);
         let i = 0;
@@ -31,7 +31,6 @@ while (condition) {
             if (val == todoUpdate.todoUpdt1) {
                 todos.splice(i, 1, todoUpdate.todoUpdt2);
                 console.clear();
-                console.log(todos);
                 break;
             }
             i++;
@@ -45,7 +44,6 @@ while (condition) {
             message: "What would you like to add in your todos list:",
         });
         todos.push(moreAdd.todoAdd); // Push new todo item into the array
-        console.log(todos);
     }
     else if (user_answer.uChoice == "Delete") {
         let todoDelete = await inquirer.prompt({
@@ -61,7 +59,6 @@ while (condition) {
             i++;
         }
         console.clear();
-        console.log(todos);
     }
     else {
         console.clear();

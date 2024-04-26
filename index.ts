@@ -20,12 +20,12 @@ import inquirer from "inquirer";
             {
                 name: "todoUpdt1",
                 type: "input",
-                message: "Please Enter your Edit Value from yur todos list -1:",
+                message: "Please Enter your Edit Name from your todos list ->:",
             },
             {
                 name: "todoUpdt2",
                 type: "input",
-                message: "Please Enter your Update Value for todos list:-2",
+                message: "Please Enter your Update Name for todos list ->",
             }
             ]
             );            
@@ -34,7 +34,6 @@ import inquirer from "inquirer";
                 if(val == todoUpdate.todoUpdt1){
                     todos.splice(i, 1, todoUpdate.todoUpdt2);
                     console.clear();
-                    console.log(todos); 
                     break;
                 } 
                 i++
@@ -47,7 +46,6 @@ import inquirer from "inquirer";
                 message: "What would you like to add in your todos list:",
             });
             todos.push(moreAdd.todoAdd); // Push new todo item into the array
-            console.log(todos);
         } else if (user_answer.uChoice == "Delete") {
             let todoDelete: any = await inquirer.prompt({
                 name: "todoDel",
@@ -61,8 +59,7 @@ import inquirer from "inquirer";
                 } 
                 i++
             }
-            console.clear();  
-            console.log(todos);            
+            console.clear();          
         } else {
             console.clear();            
             condition = false;
