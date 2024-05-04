@@ -26,15 +26,9 @@ while (condition) {
                 message: "Please Enter your Update Name for todos list ->",
             }
         ]);
-        let i = 0;
-        for (let val of todos) {
-            if (val == todoUpdate.todoUpdt1) {
-                todos.splice(i, 1, todoUpdate.todoUpdt2);
-                console.clear();
-                break;
-            }
-            i++;
-        }
+        const index = todos.indexOf(todoUpdate.todoUpdt1);
+        todos.splice(index, 1, todoUpdate.todoUpdt2);
+        console.clear();
     }
     else if (user_answer.uChoice == "Add") {
         console.clear();
@@ -51,13 +45,16 @@ while (condition) {
             type: "input",
             message: "What would you like to Delete in your todos list:",
         });
-        let i = 0;
-        for (let val of todos) {
-            if (val == todoDelete.todoDel) {
-                todos.splice(i, 1);
-            }
-            i++;
-        }
+        const index = todos.indexOf(todoDelete.todoDel);
+        todos.splice(index, 1);
+        console.clear();
+        // let i:number = 0;
+        // for(let val of todos){
+        //     if(val == todoDelete.todoDel){
+        //         todos.splice(i, 1);                    
+        //     } 
+        //     i++
+        // }
         console.clear();
     }
     else {
@@ -65,3 +62,4 @@ while (condition) {
         condition = false;
     }
 }
+// // const index = originalArray.indexOf(elementToRemove);

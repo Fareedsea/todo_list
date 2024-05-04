@@ -29,15 +29,9 @@ import inquirer from "inquirer";
             }
             ]
             );            
-            let i:number = 0;
-            for(let val of todos){                
-                if(val == todoUpdate.todoUpdt1){
-                    todos.splice(i, 1, todoUpdate.todoUpdt2);
-                    console.clear();
-                    break;
-                } 
-                i++
-            }                 
+            const index = todos.indexOf(todoUpdate.todoUpdt1);
+            todos.splice(index, 1, todoUpdate.todoUpdt2);
+            console.clear();           
         } else if (user_answer.uChoice == "Add") {
                 console.clear();
                 let moreAdd: any = await inquirer.prompt({
@@ -52,16 +46,12 @@ import inquirer from "inquirer";
                 type: "input",
                 message: "What would you like to Delete in your todos list:",
             });
-            let i:number = 0;
-            for(let val of todos){
-                if(val == todoDelete.todoDel){
-                    todos.splice(i, 1);                    
-                } 
-                i++
-            }
-            console.clear();          
+            const index = todos.indexOf(todoDelete.todoDel);
+            todos.splice(index, 1);
+            console.clear();            
         } else {
             console.clear();            
             condition = false;
         }
     }
+    
